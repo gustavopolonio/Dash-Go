@@ -74,7 +74,7 @@ export default function Dashboard() {
         <Sidebar />
 
         <SimpleGrid flex='1' minChildWidth='320px' spacing='4' alignItems='flex-start'>
-          <Box p='8' pb='4' bg='gray.800' borderRadius={8}>
+          <Box p={['6', '8']} pb='4' bg='gray.800' borderRadius={8}>
             <Text fontSize='lg' mb='4'>Inscritos da semana</Text>
             <Chart
               options={options}
@@ -83,7 +83,7 @@ export default function Dashboard() {
               height='160'
             />
           </Box>
-          <Box p='8' pb='4' bg='gray.800' borderRadius={8}>
+          <Box p={['6', '8']} pb='4' bg='gray.800' borderRadius={8}>
             <Text fontSize='lg' mb='4'>Taxa de abertura</Text>
             <Chart
               options={options}

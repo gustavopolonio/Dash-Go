@@ -1,10 +1,11 @@
-import { Flex, Box, Heading, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox, Text } from '@chakra-ui/react'
+import { Flex, Box, Heading, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox, Text, useBreakpointValue } from '@chakra-ui/react'
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
 import { Pagination } from '../../components/Pagination'
 import { RiAddLine, RiPencilLine} from 'react-icons/ri'
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({ base: false, lg: true })
 
   return (
     <Flex direction='column' h='100vh'>
@@ -30,79 +31,95 @@ export default function UserList() {
           <Table colorScheme='whiteAlpha'>
             <Thead>
               <Tr>
-                <Th w='8' px='6' color='gray.300'>
+                <Th w='8' px={['4', '4', '6']} color='gray.300'>
                   <Checkbox colorScheme='pink' />
                 </Th>
                 <Th>Usuário</Th>
-                <Th>Data de cadastro</Th>
-                <Th w='8'></Th>
+                { isWideVersion &&
+                  <Th>Data de cadastro</Th>
+                }
+                { isWideVersion &&
+                  <Th w='8'></Th>
+                }
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td px='6'>
+                <Td px={['4', '4', '6']}>
                   <Checkbox colorScheme='pink' />
                 </Td>
                 <Td>
                   <Text fontWeight='bold'>Gustavo Polonio</Text>
                   <Text fontSize='sm' color='gray.300'>gustavopolonio1@gmail.com</Text>
                 </Td>
-                <Td>26 de Abril, 2022</Td>
-                <Td>
-                  <Button 
-                    as='a'
-                    colorScheme='purple'
-                    size='sm'
-                    fontSize='sm'
-                    leftIcon={<RiPencilLine fontSize='20' />}
-                  >
-                    Editar
-                  </Button>
-                </Td>
+                { isWideVersion &&
+                  <Td>26 de Abril, 2022</Td>
+                }
+                { isWideVersion &&
+                  <Td>
+                    <Button 
+                      as='a'
+                      colorScheme='purple'
+                      size='sm'
+                      fontSize='sm'
+                      leftIcon={<RiPencilLine fontSize='20' />}
+                    >
+                      Editar
+                    </Button>
+                  </Td>
+                }
               </Tr>
 
               <Tr>
-                <Td px='6'>
+                <Td px={['4', '4', '6']}>
                   <Checkbox colorScheme='pink' />
                 </Td>
                 <Td>
                   <Text fontWeight='bold'>Gustavo Polonio</Text>
                   <Text fontSize='sm' color='gray.300'>gustavopolonio1@gmail.com</Text>
                 </Td>
-                <Td>26 de Abril, 2022</Td>
-                <Td>
-                  <Button 
-                    as='a'
-                    colorScheme='purple'
-                    size='sm'
-                    fontSize='sm'
-                    leftIcon={<RiPencilLine fontSize='20' />}
-                  >
-                    Editar
-                  </Button>
-                </Td>
+                { isWideVersion &&
+                  <Td>26 de Abril, 2022</Td>
+                }
+                { isWideVersion &&
+                  <Td>
+                    <Button 
+                      as='a'
+                      colorScheme='purple'
+                      size='sm'
+                      fontSize='sm'
+                      leftIcon={<RiPencilLine fontSize='20' />}
+                    >
+                      Editar
+                    </Button>
+                  </Td>
+                }
               </Tr>
 
               <Tr>
-                <Td px='6'>
+                <Td px={['4', '4', '6']}>
                   <Checkbox colorScheme='pink' />
                 </Td>
                 <Td>
                   <Text fontWeight='bold'>Gustavo Polonio</Text>
                   <Text fontSize='sm' color='gray.300'>gustavopolonio1@gmail.com</Text>
                 </Td>
-                <Td>26 de Abril, 2022</Td>
-                <Td>
-                  <Button 
-                    as='a'
-                    colorScheme='purple'
-                    size='sm'
-                    fontSize='sm'
-                    leftIcon={<RiPencilLine fontSize='20' />}
-                  >
-                    Editar
-                  </Button>
-                </Td>
+                { isWideVersion &&
+                  <Td>26 de Abril, 2022</Td>
+                }
+                { isWideVersion &&
+                  <Td>
+                    <Button 
+                      as='a'
+                      colorScheme='purple'
+                      size='sm'
+                      fontSize='sm'
+                      leftIcon={<RiPencilLine fontSize='20' />}
+                    >
+                      Editar
+                    </Button>
+                  </Td>
+                }
               </Tr>
 
 
