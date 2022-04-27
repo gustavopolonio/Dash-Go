@@ -7,25 +7,22 @@ interface PaginationItemProps {
 
 export function PaginationItem({ number, isCurrent }: PaginationItemProps) {
 
-  if (isCurrent) {
-    return (
-      <Button
-        size='sm'
-        fontSize='xs'
-        w='4'
-        colorScheme='pink'
-        disabled
-        _disabled={{
-          bg: 'pink.500',
-          cursor: 'default'
-        }}
-      >
-        {number}
-      </Button>
-    )
-  }
-
-  return (
+  return isCurrent 
+  ?
+    <Button
+      size='sm'
+      fontSize='xs'
+      w='4'
+      colorScheme='pink'
+      disabled
+      _disabled={{
+        bg: 'pink.500',
+        cursor: 'default'
+      }}
+    >
+      {number}
+    </Button>
+  : 
     <Button
       size='sm'
       fontSize='xs'
@@ -37,5 +34,36 @@ export function PaginationItem({ number, isCurrent }: PaginationItemProps) {
     >
       {number}
     </Button>
-  )
+
+  // if (isCurrent) {
+  //   return (
+  //     <Button
+  //       size='sm'
+  //       fontSize='xs'
+  //       w='4'
+  //       colorScheme='pink'
+  //       disabled
+  //       _disabled={{
+  //         bg: 'pink.500',
+  //         cursor: 'default'
+  //       }}
+  //     >
+  //       {number}
+  //     </Button>
+  //   )
+  // }
+
+  // return (
+  //   <Button
+  //     size='sm'
+  //     fontSize='xs'
+  //     w='4'
+  //     bg='gray.700'
+  //     _hover={{
+  //       bg: 'gray.500'
+  //     }}
+  //   >
+  //     {number}
+  //   </Button>
+  // )
 }
