@@ -1,8 +1,9 @@
 import { Header } from '../components/Header'
 import { Sidebar } from '../components/Sidebar'
-import { Flex, SimpleGrid, Box, Text, theme } from '@chakra-ui/react'
+import { Flex, SimpleGrid, Box, Text, theme, Spinner } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { ApexOptions } from 'apexcharts'
+import { useState, useEffect } from 'react'
 
 const Chart = dynamic(
   () => import('react-apexcharts'),
@@ -10,6 +11,11 @@ const Chart = dynamic(
 )
 
 export default function Dashboard() {
+  const [isChartLoaded, setIsChartLoaded] = useState(false)
+
+  useEffect(() => {
+    setIsChartLoaded(true)
+  }, [])
 
   const options: ApexOptions = {
     chart: {
@@ -76,21 +82,30 @@ export default function Dashboard() {
         <SimpleGrid flex='1' minChildWidth='320px' spacing='4' alignItems='flex-start'>
           <Box p={['6', '8']} pb='4' bg='gray.800' borderRadius={8}>
             <Text fontSize='lg' mb='4'>Inscritos da semana</Text>
-            <Chart
-              options={options}
-              series={series}
-              type='area'
-              height='160'
-            />
+            { isChartLoaded ? (
+              <Chart
+                options={options}
+                series={series}
+                type='area'
+                height='160'
+              />
+            ) : (
+              <Spinner mt='4' thickness='4px' speed='0.65s' emptyColor='gray.200' color='pink.500' size='xl' />
+            ) }
+            
           </Box>
           <Box p={['6', '8']} pb='4' bg='gray.800' borderRadius={8}>
             <Text fontSize='lg' mb='4'>Taxa de abertura</Text>
-            <Chart
-              options={options}
-              series={series}
-              type='area'
-              height='160'
-            />
+            { isChartLoaded ? (
+              <Chart
+                options={options}
+                series={series}
+                type='area'
+                height='160'
+              />
+            ) : (
+              <Spinner mt='4' thickness='4px' speed='0.65s' emptyColor='gray.200' color='pink.500' size='xl' />
+            ) }
           </Box>
         </SimpleGrid>
       </Flex>
