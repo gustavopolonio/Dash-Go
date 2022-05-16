@@ -4,10 +4,12 @@ import { Sidebar } from '../../components/Sidebar'
 import { Pagination } from '../../components/Pagination'
 import { useUsers } from '../../services/hooks/useUsers'
 import { RiAddLine, RiPencilLine} from 'react-icons/ri'
+import { useState } from 'react'
 import Link from 'next/link'
 
 export default function UserList() {
-  const { isLoading, isFetching, error, data } = useUsers()
+  const [currentPage, setCurrentPage] = useState(1)
+  const { isLoading, isFetching, error, data } = useUsers(currentPage)
 
   const isWideVersion = useBreakpointValue({ base: false, lg: true })
 
@@ -64,7 +66,7 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map(user => (
+                  {data.users.map(user => (
                     <Tr key={user.id}>
                       <Td px={['4', '4', '6']}>
                         <Checkbox colorScheme='pink' />
@@ -94,7 +96,11 @@ export default function UserList() {
                 </Tbody>
               </Table>
 
-              <Pagination />
+              <Pagination 
+                totalCountOfRegisters={data.totalCount} 
+                onPageChange={setCurrentPage}
+                currentPage={currentPage}
+              />
             </>
           ) }
         </Box>
