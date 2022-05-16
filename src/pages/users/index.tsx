@@ -1,11 +1,20 @@
-import { Flex, Box, Heading, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox, Text, useBreakpointValue, Spinner } from '@chakra-ui/react'
+import { Link, Flex, Box, Heading, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox, Text, useBreakpointValue, Spinner } from '@chakra-ui/react'
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
 import { Pagination } from '../../components/Pagination'
 import { useUsers } from '../../services/hooks/useUsers'
 import { RiAddLine, RiPencilLine} from 'react-icons/ri'
 import { useState } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
+import { api } from '../../services/api'
+import { queryClient } from '../../services/queryClient'
+
+interface User {
+  id: string,
+  name: string,
+  email: string,
+  createdAt: string
+}
 
 export default function UserList() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -13,7 +22,16 @@ export default function UserList() {
 
   const isWideVersion = useBreakpointValue({ base: false, lg: true })
 
-  
+  async function handlePrefetchUser(userId: string) {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const { data } = await api.get<User>(`users/${userId}`)
+
+      return data
+    }, {
+      staleTime: 1000 * 60 * 10 // 10 minutes
+    })
+  }
+
   return (
     <Flex direction='column' h='100vh'>
       <Header />
@@ -27,7 +45,7 @@ export default function UserList() {
               Usuários
               { !isLoading && isFetching && <Spinner size='sm' color='gray.500' ml='4' /> }
             </Heading>
-            <Link href='/users/create' passHref>
+            <NextLink href='/users/create' passHref>
               <Button
                 as='a'
                 colorScheme='pink'
@@ -37,7 +55,7 @@ export default function UserList() {
               >
                 Criar novo
               </Button>
-            </Link>
+            </NextLink>
           </Flex>
 
           { isLoading ? (
@@ -72,7 +90,9 @@ export default function UserList() {
                         <Checkbox colorScheme='pink' />
                       </Td>
                       <Td>
-                        <Text fontWeight='bold'>{user.name}</Text>
+                        <Link color='purple.400' onMouseEnter={() => handlePrefetchUser(user.id)}>
+                          <Text fontWeight='bold'>{user.name}</Text>
+                        </Link>
                         <Text fontSize='sm' color='gray.300'>{user.email}</Text>
                       </Td>
                       { isWideVersion &&
