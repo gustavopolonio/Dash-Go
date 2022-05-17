@@ -13,7 +13,7 @@ interface User {
   id: string,
   name: string,
   email: string,
-  createdAt: string
+  created_at: string
 }
 
 export default function UserList() {
@@ -96,7 +96,7 @@ export default function UserList() {
                         <Text fontSize='sm' color='gray.300'>{user.email}</Text>
                       </Td>
                       { isWideVersion &&
-                        <Td>{user.createdAt}</Td>
+                        <Td>{user.created_at}</Td>
                       }
                       { isWideVersion &&
                         <Td>
